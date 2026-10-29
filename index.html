@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Israeli and Jewish film at Mamaroneck Cinemas, all year round.">
+<title>Sound Shore Jewish Film</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&family=Frank+Ruhl+Libre:wght@500&display=swap">
+<style>
+/* Layout: a theater marquee letterboard opens the page, then a program list like a printed playbill, then the mailing list. */
+:root{
+  --bg:#F2F3F6; --surface:#FFFFFF; --ink:#161A27; --muted:#5A6175; --line:#D9DCE5;
+  --accent:#1D47C4; --accent-ink:#FFFFFF; --bulb:#F2B33D;
+  --board:#11131B; --board-ink:#F4F1E8; --board-line:#262A38;
+  --display:"Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --body:"Literata", Georgia, "Times New Roman", serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --hebrew:"Frank Ruhl Libre", "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1018; --surface:#171A25; --ink:#ECEEF4; --muted:#9CA3B8; --line:#2A2F3F;
+  --accent:#7E9BFF; --accent-ink:#0E1018; --bulb:#F5BE55;
+  --board:#05060A; --board-ink:#F4F1E8; --board-line:#1F2230; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1018; --surface:#171A25; --ink:#ECEEF4; --muted:#9CA3B8; --line:#2A2F3F;
+  --accent:#7E9BFF; --accent-ink:#0E1018; --bulb:#F5BE55;
+  --board:#05060A; --board-ink:#F4F1E8; --board-line:#1F2230; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+a{color:var(--accent)}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;line-height:.95;margin:0;text-wrap:balance}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* top bar */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:18px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.04em;text-transform:uppercase}
+.brand span{color:var(--accent)}
+.top nav{display:flex;gap:20px;font-family:var(--mono);font-size:13px}
+.top nav a{color:var(--ink);text-decoration:none}
+.top nav a:hover,.top nav a:focus-visible{color:var(--accent)}
+
+/* marquee */
+.marquee{background:var(--board);color:var(--board-ink);border-radius:6px;padding:34px 22px 30px;position:relative;margin-top:8px}
+.bulbs{position:absolute;left:14px;right:14px;height:8px;display:flex;justify-content:space-between}
+.bulbs.t{top:12px}.bulbs.b{bottom:12px}
+.bulbs i{width:8px;height:8px;border-radius:50%;background:var(--bulb);opacity:.4;animation:chase 1.8s linear infinite;animation-delay:calc(var(--i) * -0.09s)}
+.bulbs.b i{animation-direction:reverse}
+@keyframes chase{0%,22%,100%{opacity:.4;box-shadow:none}6%{opacity:1;box-shadow:0 0 12px 2px var(--bulb)}}
+.marquee{overflow:hidden;box-shadow:inset 0 0 60px rgba(242,179,61,.08)}
+.marquee::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 38%,rgba(255,236,190,.09) 50%,transparent 62%);transform:translateX(-110%);animation:sweep 8s ease-in-out 1.6s infinite}
+@keyframes sweep{0%{transform:translateX(-110%)}35%,100%{transform:translateX(110%)}}
+.rows{perspective:700px}
+.row b{display:inline-block;transform-origin:50% 50%}
+.row b.drop{animation:drop .55s cubic-bezier(.2,.9,.3,1.25) backwards}
+@keyframes drop{from{transform:translateY(-45%) rotateX(85deg);opacity:0}to{transform:none;opacity:1}}
+.row b.flip{animation:flip .44s ease-in-out}
+@keyframes flip{0%{transform:rotateX(0)}50%{transform:rotateX(90deg)}100%{transform:rotateX(0)}}
+.row.small b{text-shadow:0 0 10px rgba(242,179,61,.45)}
+@media (prefers-reduced-motion: reduce){.bulbs i,.marquee::after,.row b.drop,.row b.flip{animation:none}.bulbs i{opacity:1}}
+.rows{display:grid;gap:8px;margin:14px 0}
+.row{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+.row b{font-family:var(--display);font-weight:800;font-size:clamp(22px,5.4vw,54px);line-height:1;min-width:.72em;padding:.1em .08em .04em;text-align:center;background:linear-gradient(var(--board-line),var(--board-line)) left 50%/100% 1px no-repeat;border-bottom:2px solid var(--board-line)}
+.row b.sp{background:none;border-color:transparent;min-width:.4em}
+.row.small b{font-size:clamp(15px,3vw,26px);color:var(--bulb)}
+.marquee .heb{font-family:var(--hebrew);text-align:center;font-size:20px;color:var(--board-ink);opacity:.75;margin:6px 0 0;direction:rtl}
+
+.hero-copy{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;padding-block:40px 24px;align-items:end}
+.hero-copy p{margin:0;max-width:56ch;font-size:19px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:14px;font-weight:500;padding:13px 20px;border-radius:4px;border:1.5px solid var(--accent);text-decoration:none;display:inline-block;cursor:pointer}
+.btn.solid{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn:focus-visible,input:focus-visible{outline:3px solid var(--bulb);outline-offset:2px}
+
+section{padding-block:44px}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:8px}
+.sec-head h2{font-size:clamp(32px,5vw,48px);font-weight:900}
+
+/* program list */
+.program{list-style:none;margin:0;padding:0}
+.program li{display:grid;grid-template-columns:120px 1fr auto;gap:24px;padding-block:22px;border-bottom:1px solid var(--line);align-items:start}
+.date{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.date strong{display:block;font-family:var(--display);font-size:40px;font-weight:800;line-height:1}
+.program h3{font-size:28px;font-weight:800}
+.program p{margin:6px 0 0;color:var(--muted);max-width:60ch}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:3px;padding:3px 8px;color:var(--muted)}
+.chip.ev{border-color:var(--accent);color:var(--accent)}
+.tba{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;padding-top:6px}
+
+/* how it works */
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:20px}
+.three h3{font-size:24px;font-weight:800;margin-bottom:8px}
+.three p{margin:0;color:var(--muted)}
+
+/* venue */
+.venue{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.venue dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 20px;font-size:16px}
+.venue dt{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.venue dd{margin:0}
+
+/* signup */
+.signup{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:32px 28px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.signup h2{font-size:clamp(30px,4.5vw,44px);font-weight:900}
+.signup p{margin:10px 0 0;color:var(--muted)}
+form{display:grid;gap:10px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+input{font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);width:100%;min-width:0}
+.note{font-family:var(--mono);font-size:12px;color:var(--muted);min-height:1.2em;margin:0}
+.note.ok{color:var(--accent)}
+
+footer{padding-block:36px 48px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:20px}
+
+@media (max-width:760px){
+  .hero-copy,.venue,.signup{grid-template-columns:1fr}
+  .three{grid-template-columns:1fr}
+  .program li{grid-template-columns:1fr;gap:8px}
+  .date strong{display:inline;font-size:30px;margin-right:8px}
+  .fields{grid-template-columns:1fr}
+  .top nav{gap:14px}
+}
+
+.ml-field-group{min-width:0}
+.ml-form-embedBody form{display:grid;gap:10px}
+.ml-form-embedSubmit .btn{width:100%}
+.ml-error input{border-color:#C2412D!important}
+.ok-head{font-size:28px;font-weight:800;margin:0 0 6px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">Sound Shore <span>Jewish Film</span></div>
+    <nav aria-label="Sections"><a href="#program">Program</a><a href="#venue">Venue</a><a href="#list">Mailing list</a></nav>
+  </header>
+
+  <div class="marquee" role="img" aria-label="Marquee: Israeli and Jewish film, now showing at Mamaroneck Cinemas">
+    <div class="bulbs t" aria-hidden="true"></div>
+    <div class="rows" aria-hidden="true">
+      <div class="row small" data-text="NOW SHOWING ON MAMARONECK AVE"></div>
+      <div class="row" data-text="ISRAELI &amp; JEWISH"></div>
+      <div class="row" data-text="FILM"></div>
+    </div>
+    <p class="heb" aria-hidden="true">קולנוע ישראלי</p>
+    <div class="bulbs b" aria-hidden="true"></div>
+  </div>
+
+  <div class="hero-copy">
+    <p>The best of Israeli and Jewish cinema, on a real screen, a few blocks from home. Screenings run through the year at Mamaroneck Cinemas, and some nights come with a drink before the film and a conversation after.</p>
+    <div class="cta">
+      <a class="btn solid" href="#list">Get the screening list</a>
+      <a class="btn ghost" href="#program">See what's coming</a>
+    </div>
+  </div>
+
+  <section id="program">
+    <div class="sec-head"><h2>November program</h2><span class="label">New series from yes Studios, Israel</span></div>
+    <ul class="program">
+      <li>
+        <div class="date"><span class="label">Nov</span><strong>TBA</strong></div>
+        <div>
+          <h3>Embassy Down</h3>
+          <p>Cairo, 2011. As the Arab Spring boils over in Tahrir Square, five Israelis are trapped inside their embassy while the crowd tries to break in, and they have to hold out for 24 hours. Inspired by true events, from the creator of Your Honor.</p>
+          <div class="meta"><span class="chip">Action drama</span><span class="chip">6 episodes</span><span class="chip">Hebrew, Arabic, English, French</span><span class="chip ev">Speaker after</span></div>
+        </div>
+        <span class="tba">Details soon</span>
+      </li>
+      <li>
+        <div class="date"><span class="label">Nov</span><strong>TBA</strong></div>
+        <div>
+          <h3>Brewing Trouble</h3>
+          <p>A broke millennial and his eccentric grandfather go into business together making illegal moonshine, and end up on the wrong side of the police and a local crime family.</p>
+          <div class="meta"><span class="chip">Comedy</span><span class="chip">7 episodes</span><span class="chip">Hebrew, English subtitles</span><span class="chip ev">L'chaim before</span></div>
+        </div>
+        <span class="tba">Details soon</span>
+      </li>
+      <li>
+        <div class="date"><span class="label">Nov</span><strong>TBA</strong></div>
+        <div>
+          <h3>Pushers</h3>
+          <p>Late-1990s Israel. Johnny gets out of juvenile detention and falls in with kids from his neighborhood selling drugs, and their success puts them in the sights of the police and the old crime networks. Drawn from the creators' own lives.</p>
+          <div class="meta"><span class="chip">Crime drama</span><span class="chip">8 episodes</span><span class="chip">Hebrew, English subtitles</span><span class="chip">Mature</span></div>
+        </div>
+        <span class="tba">Details soon</span>
+      </li>
+    </ul>
+  </section>
+
+
+  <section id="chanukah">
+    <div class="sec-head"><h2>Chanukah family matinee</h2><span class="label">December 2026</span></div>
+    <ul class="program">
+      <li>
+        <div class="date"><span class="label">Dec</span><strong>TBA</strong></div>
+        <div>
+          <h3>An American Tail</h3>
+          <p>It opens on a Chanukah night in a Russian village, with the Mousekewitz family lighting the menorah. When trouble comes, they set out for America, and young Fievel ends up lost and alone in New York, searching the whole city for his family. A Jewish story about holding on to hope, for kids and the parents who grew up on it.</p>
+          <div class="meta"><span class="chip">Animated</span><span class="chip">Rated G</span><span class="chip">80 minutes</span><span class="chip ev">Menorah lighting</span><span class="chip ev">Sufganiyot</span></div>
+        </div>
+        <span class="tba">Details soon</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>How it works</h2></div>
+    <div class="three">
+      <div><h3>All year round</h3><p>No single festival week. Films come through on a rolling basis, so there's usually something on the calendar.</p></div>
+      <div><h3>Film nights</h3><p>Selected screenings get a little more: wine and something to eat beforehand, a speaker or filmmaker afterward.</p></div>
+      <div><h3>Tickets at the theater</h3><p>Buy tickets straight from Mamaroneck Cinemas, like any other movie. The list just makes sure you hear first.</p></div>
+    </div>
+  </section>
+
+  <section id="venue">
+    <div class="sec-head"><h2>The venue</h2></div>
+    <div class="venue">
+      <p style="margin:0;max-width:52ch">Mamaroneck Cinemas sits inside the old Playhouse, which opened on Mamaroneck Avenue in 1925 and came back to life as an eight-screen neighborhood theater in 2022. It's a good room for a film that deserves an audience.</p>
+      <dl>
+        <dt>Where</dt><dd>Mamaroneck Cinemas<br>243 Mamaroneck Avenue<br>Mamaroneck, NY 10543</dd>
+        <dt>Tickets</dt><dd>At the box office or the theater's website</dd>
+        <dt>Parking</dt><dd>Street and municipal lots along the Avenue</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="list">
+    <div class="signup">
+      <div>
+        <h2>Be first to know</h2>
+        <p>One short email when a new film is confirmed, plus invitations to the film nights. No spam, and you can leave anytime.</p>
+      </div>
+      <div id="mlb2-47640494" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-47640494">
+          <div class="ml-form-embedBody row-form">
+            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2744840/forms/202426650801997151/subscribe" data-code="" method="post" target="_blank">
+              <div class="fields">
+                <div class="ml-field-group ml-field-name"><input id="first-name" aria-label="First name" type="text" name="fields[name]" placeholder="First name" autocomplete="given-name"></div>
+                <div class="ml-field-group ml-field-last_name"><input id="last-name" aria-label="Last name" type="text" name="fields[last_name]" placeholder="Last name" autocomplete="family-name"></div>
+              </div>
+              <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required"><input id="email" aria-label="Email address" aria-required="true" type="email" name="fields[email]" placeholder="Email address" autocomplete="email"></div>
+              <input type="hidden" name="ml-submit" value="1">
+              <div class="ml-form-embedSubmit">
+                <button type="submit" class="btn solid primary">Join the list</button>
+                <button disabled="disabled" style="display:none" type="button" class="btn solid loading">Sending...</button>
+              </div>
+              <input type="hidden" name="anticsrf" value="true">
+              <p class="note">One short email per new film. Unsubscribe anytime.</p>
+            </form>
+          </div>
+          <div class="ml-form-successBody row-success" style="display:none">
+            <h3 class="ok-head">You're on the list</h3>
+            <p class="note ok">Thanks for joining. You'll hear from us as soon as dates are set.</p>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Sound Shore Jewish Film · Screenings at Mamaroneck Cinemas, Mamaroneck, NY</span>
+    <span>A community film series</span>
+  </footer>
+</div>
+
+<script>
+// Marquee: letters drop in, bulbs chase, top line flips through the program
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function setTile(b,c){ if(c===' '){b.classList.add('sp');b.textContent='\u00a0';} else {b.classList.remove('sp');b.textContent=c;} }
+  var rows=document.querySelectorAll('.row'), k=0;
+  rows.forEach(function(row){
+    var t=row.getAttribute('data-text').replace(/&amp;/g,'&');
+    for(var i=0;i<t.length;i++){ var b=document.createElement('b'); setTile(b,t[i]); b.style.animationDelay=(k++*40)+'ms'; b.classList.add('drop'); row.appendChild(b); }
+  });
+  document.querySelectorAll('.bulbs').forEach(function(el){
+    var n=Math.max(10,Math.round(el.offsetWidth/30));
+    for(var i=0;i<n;i++){ var d=document.createElement('i'); d.style.setProperty('--i',i); el.appendChild(d); }
+  });
+  var small=document.querySelector('.row.small'); if(!small||reduce) return;
+  var msgs=['NOW SHOWING ON MAMARONECK AVE','NOVEMBER: EMBASSY DOWN','BREWING TROUBLE','PUSHERS',"FILM NIGHTS + L'CHAIM",'ISRAELI AND JEWISH FILM'];
+  var L=small.children.length;
+  msgs=msgs.map(function(m){ m=m.slice(0,L); var p=L-m.length, l=Math.floor(p/2); return ' '.repeat(l)+m+' '.repeat(p-l); });
+  var idx=0;
+  setInterval(function(){
+    idx=(idx+1)%msgs.length; var m=msgs[idx];
+    Array.prototype.forEach.call(small.children,function(b,i){
+      if((b.textContent==='\u00a0'?' ':b.textContent)===m[i]) return;
+      setTimeout(function(){ b.style.animationDelay='0ms'; b.classList.remove('drop','flip'); void b.offsetWidth; b.classList.add('flip'); setTimeout(function(){ setTile(b,m[i]); },220); }, i*28);
+    });
+  }, 4200);
+})();
+</script>
+
+<script>
+function ml_webform_success_47640494(){var $=ml_jQuery||jQuery;$('.ml-subscribe-form-47640494 .row-success').show();$('.ml-subscribe-form-47640494 .row-form').hide();}
+</script>
+<script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
+<script>fetch("https://assets.mailerlite.com/jsonp/2744840/forms/202426650801997151/takel")</script>
+</body>
+</html>
